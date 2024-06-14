@@ -49,6 +49,8 @@ const CinemaCard = (props: IProps) => {
 
     const res = await callFetchCinema(query);
     if (res && res.data) {
+      console.log(res.data.result);
+      
       setDisplayCinema(res.data.result);
       setTotal(res.data.meta.total);
     }
@@ -89,11 +91,12 @@ const CinemaCard = (props: IProps) => {
                 <span className={styles["title"]}>Rạp phim</span>
                 {!showPagination && <Link to="cinema">Xem tất cả</Link>}
               </div>
-              <Carousel autoplay dots={true} dotPosition="top">
+              <Carousel dots={{ className: styles['custom-dots'] }} dotPosition="bottom">
                 {displayCinema?.slice(0, 5).map((item) => (
                   <Card
                     onClick={() => handleViewDetailJob(item)}
                     style={{ height: 350 }}
+                    bodyStyle={{ padding: 0 }}
                     hoverable
                     cover={
                       <div className={styles["card-customize"]}>
@@ -108,7 +111,6 @@ const CinemaCard = (props: IProps) => {
                     key={item._id}
                   >
                     <Divider />
-                    <h3 style={{ textAlign: "center" }}>{item.name}</h3>
                   </Card>
                 ))}
               </Carousel>
