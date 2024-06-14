@@ -103,7 +103,7 @@ const FilmCard = (props: IProps) => {
               return (
                 <Col span={24} md={6} key={item._id}>
                   <Card
-                    size="large"
+                    // size="large"
                     title={null}
                     hoverable
                     onClick={() => handleViewDetailFilm(item)}
@@ -113,14 +113,13 @@ const FilmCard = (props: IProps) => {
                         <img
                           alt="example"
                           className={styles["card-film-image"]}
-                          src={`${import.meta.env.VITE_BACKEND_URL
-                            }/images/film/${item?.logo}`}
+                          src={`${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/images/film/${item?.logo}`}
                         />
                       </div>
                       <div className={styles["card-film-right"]}>
-                        <div className={styles["film-title"]}>
-                          {item.name}
-                        </div>
+                        <div className={styles["film-title"]}>{item.name}</div>
                         <div className={styles["film-location"]}>
                           <ClockCircleOutlined style={{ color: "#58aaab" }} />
                           &nbsp;{`${item.time} phút`}

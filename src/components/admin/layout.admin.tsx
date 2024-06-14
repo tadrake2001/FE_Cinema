@@ -78,6 +78,11 @@ const LayoutAdmin = () => {
         icon: <VideoCameraOutlined />,
       },
       {
+        label: <Link to="/admin/promotion">Promotion</Link>,
+        key: "promotion",
+        icon: <ScheduleOutlined />,
+      },
+      {
         label: <Link to="/admin/ticket">Ticket</Link>,
         key: "ticket",
         icon: <FileOutlined />,

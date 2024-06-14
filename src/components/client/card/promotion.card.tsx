@@ -1,6 +1,6 @@
-import { callFetchCinema } from '@/config/api';
+import { callFetchPromotion } from "@/config/api";
 import { colorMethod, convertSlug } from "@/config/utils";
-import { ICinema } from "@/types/backend";
+import { IPromotion } from "@/types/backend";
 import {
   Card,
   Col,
@@ -20,10 +20,12 @@ interface IProps {
   showPagination?: boolean;
 }
 
-const CinemaCard = (props: IProps) => {
+const PromotionCard = (props: IProps) => {
   const { showPagination = false } = props;
 
-  const [displayCinema, setDisplayCinema] = useState<ICinema[] | null>(null);
+  const [displayPromotion, setDisplayPromotion] = useState<IPromotion[] | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [current, setCurrent] = useState(1);
@@ -34,10 +36,10 @@ const CinemaCard = (props: IProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCinema();
+    fetchPromotion();
   }, [current, pageSize, filter, sortQuery]);
 
-  const fetchCinema = async () => {
+  const fetchPromotion = async () => {
     setIsLoading(true);
     let query = `current=${current}&pageSize=${pageSize}`;
     if (filter) {
@@ -47,11 +49,11 @@ const CinemaCard = (props: IProps) => {
       query += `&${sortQuery}`;
     }
 
-    const res = await callFetchCinema(query);
+    const res = await callFetchPromotion(query);
     if (res && res.data) {
       console.log(res.data.result);
-      
-      setDisplayCinema(res.data.result);
+
+      setDisplayPromotion(res.data.result);
       setTotal(res.data.meta.total);
     }
     setIsLoading(false);
@@ -70,16 +72,16 @@ const CinemaCard = (props: IProps) => {
     }
   };
 
-  const handleViewDetailJob = (item: ICinema) => {
+  const handleViewDetailJob = (item: IPromotion) => {
     if (item.name) {
       const slug = convertSlug(item.name);
-      navigate(`/cinema/${slug}?id=${item._id}`);
+      navigate(`/promotion/${slug}?id=${item._id}`);
     }
   };
 
   return (
-    <div className={`${styles["cinema-section"]}`}>
-      <div className={styles["cinema-content"]}>
+    <div className={`${styles["promotion-section"]}`}>
+      <div className={styles["promotion-content"]}>
         <Spin spinning={isLoading} tip="Loading...">
           <Row gutter={[20, 20]}>
             <Col span={24}>
@@ -89,14 +91,14 @@ const CinemaCard = (props: IProps) => {
                 }
               >
                 <span className={styles["title"]}>Rạp phim</span>
-                {!showPagination && <Link to="cinema">Xem tất cả</Link>}
+                {!showPagination && <Link to="promotion">Xem tất cả</Link>}
               </div>
               <Carousel
                 autoplay
                 dots={{ className: styles["custom-dots"] }}
                 dotPosition="bottom"
               >
-                {displayCinema?.slice(0, 5).map((item) => (
+                {displayPromotion?.slice(0, 5).map((item) => (
                   <Card
                     onClick={() => handleViewDetailJob(item)}
                     style={{ height: 350 }}
@@ -108,7 +110,7 @@ const CinemaCard = (props: IProps) => {
                           alt="example"
                           src={`${
                             import.meta.env.VITE_BACKEND_URL
-                          }/images/cinema/${item?.logo}`}
+                          }/images/promotion/${item?.logo}`}
                         />
                       </div>
                     }
@@ -120,8 +122,8 @@ const CinemaCard = (props: IProps) => {
               </Carousel>
             </Col>
 
-            {(!displayCinema ||
-              (displayCinema && displayCinema.length === 0)) &&
+            {(!displayPromotion ||
+              (displayPromotion && displayPromotion.length === 0)) &&
               !isLoading && (
                 <div className={styles["empty"]}>
                   <Empty description="Không có dữ liệu" />
@@ -131,7 +133,7 @@ const CinemaCard = (props: IProps) => {
           {showPagination && (
             <>
               <div style={{ marginTop: 30 }}></div>
-              <Row style={{ display: "flex", justifyContent: "center" }}>
+              <Row style={{ display: "fill", justifyContent: "center" }}>
                 <Pagination
                   current={current}
                   total={total}
@@ -150,4 +152,4 @@ const CinemaCard = (props: IProps) => {
   );
 };
 
-export default CinemaCard;
+export default PromotionCard;

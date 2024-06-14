@@ -1,4 +1,4 @@
-import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission, IShowtime, IModelPaginate1 } from '@/types/backend';
+import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission, IShowtime, IModelPaginate1, IPromotion } from '@/types/backend';
 import axios from 'config/axios-customize';
 
 /**
@@ -110,6 +110,30 @@ export const callFetchCinema = (query: string) => {
 
 export const callFetchCinemaById = (id: string) => {
     return axios.get<IBackendRes<ICinema>>(`/api/v1/cinemas/${id}`);
+}
+
+/**
+ * 
+Module Promotion
+ */
+export const callCreatePromotion = (name: string, startDate: Date, endDate: Date,description: string, logo: string, link: string) => {
+    return axios.post<IBackendRes<IPromotion>>('/api/v1/promotions', { name, startDate, endDate, description, logo, link })
+}
+
+export const callUpdatePromotion = (id: string, name: string, startDate: Date, endDate: Date,description: string, logo: string, link: string) => {
+    return axios.patch<IBackendRes<IPromotion>>(`/api/v1/promotions/${id}`, { name, startDate, endDate, description, logo, link })
+}
+
+export const callDeletePromotion = (id: string) => {
+    return axios.delete<IBackendRes<IPromotion>>(`/api/v1/promotions/${id}`);
+}
+
+export const callFetchPromotion = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate<IPromotion>>>(`/api/v1/promotions?${query}`);
+}
+
+export const callFetchPromotionById = (id: string) => {
+    return axios.get<IBackendRes<IPromotion>>(`/api/v1/promotions/${id}`);
 }
 
 /**
