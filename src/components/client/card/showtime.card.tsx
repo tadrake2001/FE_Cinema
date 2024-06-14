@@ -85,6 +85,67 @@ const ShowtimeCard = (props: IProps) => {
   const [dataUpdate, setDataUpdate] = useState<IShowtime | null>(null);
   const [form] = Form.useForm();
 
+  const dataFake = [
+    {
+        "_id": "666b1180f90b4dc2a2d2b647",
+        "dateStart": "2024-06-13T14:00:00.789Z",
+        "dateEnd": "2024-06-13T15:49:00.789Z",
+        "room": {
+            "_id": "6663560c2156b4880c45a25e",
+            "name": "CGV 1"
+        },
+        "cinema": {
+            "_id": "661f1bba80a3f40e90233eca",
+            "name": "CGV Cinema"
+        },
+        "film": {
+            "_id": "661f191231b1c56dcbdab2fb",
+            "name": "KUNG FU PANDA 4",
+            "time": 94
+        },
+        "createdBy": {
+            "_id": "659d0c9e6c428409f3acf9b7",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-06-13T15:34:24.343Z",
+        "updatedAt": "2024-06-13T15:34:24.343Z",
+        "__v": 0
+    },
+    {
+      "_id": "666b1180f90b4dc2a2d2b647",
+      "dateStart": "2024-06-13T14:00:00.789Z",
+      "dateEnd": "2024-06-13T15:49:00.789Z",
+      "room": {
+          "_id": "6663560c2156b4880c45a25e",
+          "name": "CGV 1"
+      },
+      "cinema": {
+          "_id": "661f1bba80a3f40e90233eca",
+          "name": "CGV Cinema"
+      },
+      "film": {
+          "_id": "661f191231b1c56dcbdab2fb",
+          "name": "KUNG FU PANDA 4",
+          "time": 94
+      },
+      "createdBy": {
+          "_id": "659d0c9e6c428409f3acf9b7",
+          "email": "admin@gmail.com"
+      },
+      "isDeleted": false,
+      "deletedAt": null,
+      "createdAt": "2024-06-13T15:34:24.343Z",
+      "updatedAt": "2024-06-13T15:34:24.343Z",
+      "__v": 0
+  },
+]
+
+useEffect(() => {
+  console.log('Component mounted');
+}, []);
+
   // useEffect(() => {
   //   fetchShowtime();
   // }, [form]);
@@ -171,7 +232,7 @@ const ShowtimeCard = (props: IProps) => {
   return (
     <div className={styles["upsert-showtime-container"]}>
       <div>
-        <ConfigProvider locale={enUS}>
+        <ConfigProvider locale={enUS} >
           <ProForm onFinish={onFinish}>
             <Row gutter={[20, 20]}>
               <Col lg={12} md={12} sm={24} xs={24}>
