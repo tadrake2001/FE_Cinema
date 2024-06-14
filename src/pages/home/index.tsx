@@ -13,17 +13,13 @@ import CinemaCard from '@/components/client/card/cinema.card';
 
 const HomePage = () => {
     return (
-        <div className={`${styles["container"]} ${styles["home-section"]}`}>
-            <div className="search-content" style={{ marginTop: 20 }}>
-                <SearchClient />
-            </div>
-            <Divider />
-            <CinemaCard />
-            <div style={{ margin: 50 }}></div>
-            <Divider />
-            <FilmCard />
-        </div>
-    )
+      <div className={`${styles["container"]} ${styles["home-section"]}`}>
+        <CinemaCard />
+        <div style={{ margin: 50 }}></div>
+        <Divider />
+        <FilmCard />
+      </div>
+    );
 }
 
 export default HomePage;

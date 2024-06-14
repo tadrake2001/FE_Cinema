@@ -1,4 +1,4 @@
-import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission } from '@/types/backend';
+import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission, IShowtime, IModelPaginate1 } from '@/types/backend';
 import axios from 'config/axios-customize';
 
 /**
@@ -132,10 +132,38 @@ export const callFetchRoom = (query: string) => {
     return axios.get<IBackendRes<IModelPaginate<IRoom>>>(`/api/v1/rooms?${query}`);
 }
 
+export const callFetchRoomByCinema = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate<IRoom>>>(`/api/v1/rooms?${query}`);
+}
+
 export const callFetchRoomById = (id: string) => {
     return axios.get<IBackendRes<IRoom>>(`/api/v1/rooms/${id}`);
 }
+//
 
+export const callCreateShowtime = (showtime: IShowtime) => {
+    return axios.post<IBackendRes<IShowtime>>('/api/v1/showtimes', { ...showtime })
+}
+
+export const callUpdateShowtime = (showtime: IShowtime, id: string) => {
+    return axios.patch<IBackendRes<IShowtime>>(`/api/v1/showtimes/${id}`, { ...showtime })
+}
+
+export const callDeleteShowtime = (id: string) => {
+    return axios.delete<IBackendRes<IShowtime>>(`/api/v1/showtimes/${id}`);
+}
+
+export const callFetchShowtime = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate<IShowtime>>>(`/api/v1/showtimes?${query}`);
+}
+
+export const callFetchShowtimeByDate = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate1<IShowtime>>>(`/api/v1/showtimes/pagination?${query}`);
+}
+
+export const callFetchShowtimeById = (id: string) => {
+    return axios.get<IBackendRes<IShowtime>>(`/api/v1/showtimes/${id}`);
+}
 /**
  * 
 Module Ticket

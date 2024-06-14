@@ -57,9 +57,7 @@ const initialState: IState = {
 export const accountSlide = createSlice({
     name: 'account',
     initialState,
-    // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        // Use the PayloadAction type to declare the contents of `action.payload`
         setActiveMenu: (state, action) => {
             state.activeMenu = action.payload;
         },
@@ -92,7 +90,6 @@ export const accountSlide = createSlice({
 
     },
     extraReducers: (builder) => {
-        // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(fetchAccount.pending, (state, action) => {
             if (action.payload) {
                 state.isAuthenticated = false;

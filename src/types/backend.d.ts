@@ -15,6 +15,20 @@ export interface IModelPaginate<T> {
     result: T[]
 }
 
+export interface IModelPaginate<T> {
+    meta: {
+        current: number;
+        pageSize: number;
+        pages: number;
+        total: number;
+    },
+    result: T[]
+}
+
+export interface IModelPaginate1<T> {
+    items: T[]
+}
+
 export interface IAccount {
     access_token: string;
     user: {
@@ -42,7 +56,7 @@ export interface IFilm {
     name: string;
     director?: string;
     logo: string;
-    time: string;
+    time: number;
     description: string;
     startDate: Date;
     endDate: Date;
@@ -93,6 +107,35 @@ export interface ICinema {
     createdAt?: string;
     updatedAt?: string;
     address: string;
+}
+
+export interface IShowtime {
+    _id?: string;
+    seats?: {
+        _id: string;
+        status: string;
+        price: number;
+    }[];
+    room?: {
+        _id: string;
+        name: string;
+    }
+    cinema?: {
+        _id: string;
+        name: string;
+    }
+    film?: {
+        _id: string;
+        name: string;
+        time: number;
+    }
+    dateStart?: Date;
+    dateEnd?: Date;
+    createdBy?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface IRoom {

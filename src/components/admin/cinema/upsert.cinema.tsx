@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DebounceSelect } from "../user/debouce.select";
 import { FooterToolbar, ModalForm, ProCard, ProForm, ProFormDatePicker, ProFormDigit, ProFormSelect, ProFormSwitch, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import styles from 'styles/admin.module.scss';
-import { LOCATION_LIST, SKILLS_LIST } from "@/config/utils";
+import { LOCATION_LIST } from "@/config/utils";
 import { IFilmSelect } from "../user/modal.user";
 import { useState, useEffect } from 'react';
 import { callCreateCinema, callFetchFilm, callFetchCinemaById, callUpdateCinema, callUploadSingleFile } from "@/config/api";

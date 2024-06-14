@@ -26,12 +26,16 @@ import { fetchAccount } from './redux/slice/accountSlide';
 import LayoutApp from './components/share/layout.app';
 import CinemaPage from './pages/admin/cinema';
 import ViewUpsertCinema from './components/admin/cinema/upsert.cinema';
-import ClientCinemaPage from './pages/film';
-import ClientCinemaDetailPage from './pages/cinema/detail';
-import ClientFilmPage from './pages/film';
-import ClientFilmDetailPage from './pages/film/detail';
-import ViewUpsertRoom from './components/admin/room/upsert.room';
-import RoomPage from './pages/admin/room';
+import ClientCinemaDetailPage from "./pages/cinema/detail";
+import ClientFilmDetailPage from "./pages/film/detail";
+import ViewUpsertRoom from "./components/admin/room/upsert.room";
+import RoomPage from "./pages/admin/room";
+import ShowtimePage from "./pages/admin/showtime";
+import ViewUpsertShowtime from "./components/admin/showtimes/upsert.showtime";
+import ClientShowtimeDetailPage from "./pages/showtime/detail";
+import ClientFilmPage from "./pages/film";
+import ClientCinemaPage from "./pages/cinema";
+import ClientShowtimePage from "./pages/showtime";
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,74 +44,86 @@ const LayoutClient = () => {
 
   useEffect(() => {
     if (rootRef && rootRef.current) {
-      rootRef.current.scrollIntoView({ behavior: 'smooth' });
+      rootRef.current.scrollIntoView({ behavior: "smooth" });
     }
-
   }, [location]);
 
   return (
-    <div className='layout-app' ref={rootRef}>
+    <div className="layout-app" ref={rootRef}>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className={styles['content-app']}>
+      <div className={styles["content-app"]}>
         <Outlet context={[searchTerm, setSearchTerm]} />
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default function App() {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(state => state.account.isLoading);
-
+  const isLoading = useAppSelector((state) => state.account.isLoading);
 
   useEffect(() => {
     if (
-      window.location.pathname === '/login'
-      || window.location.pathname === '/register'
+      window.location.pathname === "/login" ||
+      window.location.pathname === "/register"
     )
       return;
-    dispatch(fetchAccount())
-  }, [])
+    dispatch(fetchAccount());
+  }, []);
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (<LayoutApp><LayoutClient /></LayoutApp>),
+      element: (
+        <LayoutApp>
+          <LayoutClient />
+        </LayoutApp>
+      ),
       errorElement: <NotFound />,
       children: [
         { index: true, element: <HomePage /> },
         { path: "cinema", element: <ClientCinemaPage /> },
         { path: "cinema/:id", element: <ClientCinemaDetailPage /> },
         { path: "film", element: <ClientFilmPage /> },
-        { path: "film/:id", element: <ClientFilmDetailPage /> }
+        { path: "film/:id", element: <ClientFilmDetailPage /> },
+        { path: "showtime", element: <ClientShowtimePage /> },
+        { path: "showtime/:id", element: <ClientShowtimeDetailPage /> },
       ],
     },
 
     {
       path: "/admin",
-      element: (<LayoutApp><LayoutAdmin /> </LayoutApp>),
+      element: (
+        <LayoutApp>
+          <LayoutAdmin />{" "}
+        </LayoutApp>
+      ),
       errorElement: <NotFound />,
       children: [
         {
-          index: true, element:
+          index: true,
+          element: (
             <ProtectedRoute>
               <DashboardPage />
             </ProtectedRoute>
+          ),
         },
         {
           path: "film",
-          element:
+          element: (
             <ProtectedRoute>
               <FilmPage />
             </ProtectedRoute>
+          ),
         },
         {
           path: "user",
-          element:
+          element: (
             <ProtectedRoute>
               <UserPage />
             </ProtectedRoute>
+          ),
         },
 
         {
@@ -115,49 +131,78 @@ export default function App() {
           children: [
             {
               index: true,
-              element: <ProtectedRoute> <CinemaPage /></ProtectedRoute>
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <CinemaPage />
+                </ProtectedRoute>
+              ),
             },
-
-          ]
+          ],
         },
         {
           path: "room",
           children: [
             {
               index: true,
-              element: <ProtectedRoute> <RoomPage /></ProtectedRoute>
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <RoomPage />
+                </ProtectedRoute>
+              ),
             },
             {
-              path: "upsert", element:
-                <ProtectedRoute><ViewUpsertRoom /></ProtectedRoute>
-            }
-          ]
+              path: "upsert",
+              element: (
+                <ProtectedRoute>
+                  <ViewUpsertRoom />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
+        {
+          path: "showtime",
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <ShowtimePage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "upsert",
+              element: (
+                <ProtectedRoute>
+                  <ViewUpsertShowtime />
+                </ProtectedRoute>
+              ),
+            },
+          ],
         },
 
         {
-          path: "ticket",
-          element:
-            <ProtectedRoute>
-              <TicketPage />
-            </ProtectedRoute>
-        },
-        {
           path: "permission",
-          element:
+          element: (
             <ProtectedRoute>
               <PermissionPage />
             </ProtectedRoute>
+          ),
         },
         {
           path: "role",
-          element:
+          element: (
             <ProtectedRoute>
               <RolePage />
             </ProtectedRoute>
-        }
+          ),
+        },
       ],
     },
-
 
     {
       path: "/login",
@@ -174,5 +219,5 @@ export default function App() {
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
