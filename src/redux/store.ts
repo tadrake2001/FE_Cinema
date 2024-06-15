@@ -7,6 +7,7 @@ import accountReducer from './slice/accountSlide';
 import filmReducer from './slice/filmSlide';
 import userReducer from './slice/userSlide';
 import cinemaReducer from './slice/cinemaSlide';
+import promotionReducer from './slice/promotionSlide';
 import roomReducer from './slice/roomSlide';
 import ticketReducer from './slice/ticketSlide';
 import permissionReducer from './slice/permissionSlide';
@@ -19,6 +20,7 @@ export const store = configureStore({
     film: filmReducer,
     user: userReducer,
     cinema: cinemaReducer,
+    promotion: promotionReducer,
     room: roomReducer,
     showtime: showtimeReducer,
     ticket: ticketReducer,

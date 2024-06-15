@@ -109,6 +109,22 @@ export interface ICinema {
     address: string;
 }
 
+export interface IPromotion {
+    _id?: string;
+    name: string;
+    logo: string;
+    description: string;
+    startDate: Date;
+    endDate: Date;
+    link: string;
+    createdBy?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+
 export interface IShowtime {
     _id?: string;
     seats?: {

@@ -24,8 +24,7 @@ import RolePage from './pages/admin/role';
 import UserPage from './pages/admin/user';
 import { fetchAccount } from './redux/slice/accountSlide';
 import LayoutApp from './components/share/layout.app';
-import CinemaPage from './pages/admin/cinema';
-import ViewUpsertCinema from './components/admin/cinema/upsert.cinema';
+import CinemaPage from "./pages/admin/cinema";
 import ClientCinemaDetailPage from "./pages/cinema/detail";
 import ClientFilmDetailPage from "./pages/film/detail";
 import ViewUpsertRoom from "./components/admin/room/upsert.room";
@@ -36,6 +35,9 @@ import ClientShowtimeDetailPage from "./pages/showtime/detail";
 import ClientFilmPage from "./pages/film";
 import ClientCinemaPage from "./pages/cinema";
 import ClientShowtimePage from "./pages/showtime";
+import PromotionPage from "./pages/admin/promotion";
+import ClientPromotionPage from "./pages/promotion";
+import ClientPromotionDetailPage from "./pages/promotion/detail";
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -89,6 +91,8 @@ export default function App() {
         { path: "film/:id", element: <ClientFilmDetailPage /> },
         { path: "showtime", element: <ClientShowtimePage /> },
         { path: "showtime/:id", element: <ClientShowtimeDetailPage /> },
+        { path: "promotion", element: <ClientPromotionPage /> },
+        { path: "promotion/:id", element: <ClientPromotionDetailPage /> },
       ],
     },
 
@@ -184,7 +188,20 @@ export default function App() {
             },
           ],
         },
-
+        {
+          path: "promotion",
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <PromotionPage />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
         {
           path: "permission",
           element: (

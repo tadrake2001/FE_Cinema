@@ -52,6 +52,11 @@ const Header = (props: any) => {
       key: "showtime",
       icon: <FormOutlined />,
     },
+    {
+      label: <Link to={"promotion"}>Khuyến mãi</Link>,
+      key: "promotion",
+      icon: <FormOutlined />,
+    },
   ];
 
   const [current, setCurrent] = useState("home");
