@@ -136,6 +136,8 @@ export interface IShowtime {
     deletedAt?: boolean | null;
     createdAt?: string;
     updatedAt?: string;
+    slotNumberSet?: number;
+    slotNumber?: number;
 }
 
 export interface IRoom {

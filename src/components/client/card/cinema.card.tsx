@@ -91,7 +91,7 @@ const CinemaCard = (props: IProps) => {
                 <span className={styles["title"]}>Rạp phim</span>
                 {!showPagination && <Link to="cinema">Xem tất cả</Link>}
               </div>
-              <Carousel dots={{ className: styles['custom-dots'] }} dotPosition="bottom">
+              <Carousel autoplay dots={{ className: styles['custom-dots'] }} dotPosition="bottom">
                 {displayCinema?.slice(0, 5).map((item) => (
                   <Card
                     onClick={() => handleViewDetailJob(item)}
