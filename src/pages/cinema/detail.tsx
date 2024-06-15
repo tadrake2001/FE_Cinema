@@ -27,6 +27,8 @@ const ClientCinemaDetailPage = (props: any) => {
                 const res = await callFetchCinemaById(id);
                 if (res?.data) {
                     setCinemaDetail(res.data)
+                    console.log(res.data);
+                    
                 }
                 setIsLoading(false)
             }
@@ -35,44 +37,49 @@ const ClientCinemaDetailPage = (props: any) => {
     }, [id]);
 
     return (
-        <div className={`${styles["container"]} ${styles["detail-job-section"]}`}>
+        <div className={`${styles["container"]} ${styles["detail-cinema-section"]}`}>
             {isLoading ?
                 <Skeleton />
                 :
-                <Row gutter={[20, 20]}>
-                    {cinemaDetail && cinemaDetail._id &&
+                <>
+                    {cinemaDetail && cinemaDetail._id && (
                         <>
-                            <Col span={24} md={16}>
-                                <div className={styles["header"]}>
-                                    {cinemaDetail.name}
+                            <div className={styles["detail-container"]}>
+                                <div className={styles["detail-slide"]}>
+                                    <div className={styles["slider-container"]}>
+                                        <img
+                                            alt="detail-film"
+                                            className={styles["slide-image"]}
+                                            src={`${import.meta.env.VITE_BACKEND_URL}/images/cinema/${cinemaDetail.logo
+                                                }`}
+                                        />
+                                    </div>
                                 </div>
-
-                            <div className={styles["location"]}>
-                                <EnvironmentOutlined style={{ color: '#58aaab' }} />&nbsp;{(cinemaDetail?.address)}
+                                <div className={styles["detail-info"]}>
+                                    <div className={styles["info-top"]}>
+                                        <div className={styles["info-content"]}>
+                                            <div className={styles["info-text"]}>
+                                                <div className={styles["name"]}>
+                                                    <div className={styles["header"]}>
+                                                        Rạp chiếu phim: {cinemaDetail.name}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <Divider />
-                            {parse(cinemaDetail?.description ?? "")}
-                        </Col>
-
-                        <Col span={24} md={8}>
-                            <div className={styles["cinema"]}>
-                                <div className={`${styles["image-container"]}`}>
-                                    <img
-                                        alt="example"
-                                        src={`${import.meta.env.VITE_BACKEND_URL}/images/cinema/${cinemaDetail?.logo}`}
-                                    />
+                                <div className={styles["info-address"]}>
+                                    <strong>Địa chỉ: </strong> {cinemaDetail.address}
                                 </div>
-                                <div>
-                                    <h3 style={{ textAlign: "center" }}>{cinemaDetail.name}</h3>
+                                <div className={styles["info-bot"]}>
+                                    {parse(cinemaDetail.description)}
                                 </div>
                             </div>
-                        </Col>
                         </>
-                    }
-                </Row>
+                    )}
+                </>
             }
-        </div>
+        </div >
     )
 }
 export default ClientCinemaDetailPage;

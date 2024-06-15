@@ -32,6 +32,8 @@ const ClientPromotionDetailPage = (props: any) => {
         const res = await callFetchPromotionById(id);
         if (res?.data) {
           setPromotionDetail(res.data);
+          console.log(res.data);
+
         }
         setIsLoading(false);
       }
@@ -44,41 +46,32 @@ const ClientPromotionDetailPage = (props: any) => {
       {isLoading ? (
         <Skeleton />
       ) : (
-        <Row gutter={[20, 20]}>
+        <>
           {promotionDetail && promotionDetail._id && (
             <>
-              <Col span={24} md={16}>
-                <div className={styles["header"]}>{promotionDetail.name}</div>
-
-                <div className={styles["location"]}>
-                  <EnvironmentOutlined style={{ color: "#58aaab" }} />
-                  &nbsp;{promotionDetail?.name}
+              <div className={styles["detail-container"]}>
+                <div className={styles["detail-title"]}>
+                  <div className={styles["header"]}>{promotionDetail.name}</div>
                 </div>
-
-                <Divider />
-                {parse(promotionDetail?.description ?? "")}
-              </Col>
-
-              <Col span={24} md={8}>
-                <div className={styles["promotion"]}>
+                <div className={styles["detail-image"]}>
                   <div className={`${styles["image-container"]}`}>
                     <img
                       alt="example"
-                      src={`${
-                        import.meta.env.VITE_BACKEND_URL
-                      }/images/promotion/${promotionDetail?.logo}`}
+                      src={`${import.meta.env.VITE_BACKEND_URL
+                        }/images/promotion/${promotionDetail?.logo}`}
                     />
                   </div>
-                  <div>
-                    <h3 style={{ textAlign: "center" }}>
-                      {promotionDetail.name}
-                    </h3>
+                </div>
+                <div className={styles["detail-description"]}>
+                  <div className={styles["description"]}>
+                    {parse(promotionDetail?.description ?? "")}
                   </div>
                 </div>
-              </Col>
+              </div>
             </>
           )}
-        </Row>
+        </>
+
       )}
     </div>
   );
