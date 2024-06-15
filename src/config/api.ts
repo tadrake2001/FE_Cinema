@@ -1,4 +1,4 @@
-import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission, IShowtime, IModelPaginate1, IPromotion } from '@/types/backend';
+import { IBackendRes, IFilm, IAccount, IUser, IModelPaginate, IGetAccount, ICinema, IRoom, ITicket, IRole, IPermission, IShowtime, IModelPaginate1, IPromotion, ISnack, IDiscount } from '@/types/backend';
 import axios from 'config/axios-customize';
 
 /**
@@ -42,7 +42,19 @@ export const callUploadSingleFile = (file: any, folderType: string) => {
     });
 }
 
-
+export const callUploadFiles = (files: any, folderType: string) => {
+    const bodyFormData = new FormData();
+    bodyFormData.append('fileUploads', files);
+    return axios<IBackendRes<{ fileNames: string }>>({
+        method: 'post',
+        url: '/api/v1/files/uploads',
+        data: bodyFormData,
+        headers: {
+            "Content-Type": "multipart/form-data",
+            "folder_type": folderType
+        },
+    });
+}
 
 
 /**
@@ -114,6 +126,30 @@ export const callFetchCinemaById = (id: string) => {
 
 /**
  * 
+Module Snack
+ */
+export const callCreateSnack = (name: string, price: number, description: string, image: string) => {
+    return axios.post<IBackendRes<ISnack>>('/api/v1/snacks', { name, price, description, image })
+}
+
+export const callUpdateSnack = (id: string, name: string, price: number, description: string, image: string) => {
+    return axios.patch<IBackendRes<ISnack>>(`/api/v1/snacks/${id}`, { name, price, description, image })
+}
+
+export const callDeleteSnack = (id: string) => {
+    return axios.delete<IBackendRes<ISnack>>(`/api/v1/snacks/${id}`);
+}
+
+export const callFetchSnack = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate<ISnack>>>(`/api/v1/snacks?${query}`);
+}
+
+export const callFetchSnackById = (id: string) => {
+    return axios.get<IBackendRes<ISnack>>(`/api/v1/snacks/${id}`);
+}
+
+/**
+ * 
 Module Promotion
  */
 export const callCreatePromotion = (name: string, startDate: Date, endDate: Date,description: string, logo: string, link: string) => {
@@ -162,6 +198,31 @@ export const callFetchRoomByCinema = (query: string) => {
 
 export const callFetchRoomById = (id: string) => {
     return axios.get<IBackendRes<IRoom>>(`/api/v1/rooms/${id}`);
+}
+//
+
+/**
+ * 
+Module Discount
+ */
+export const callCreateDiscount = (discount: IDiscount) => {
+    return axios.post<IBackendRes<IDiscount>>('/api/v1/discounts', { ...discount })
+}
+
+export const callUpdateDiscount = (discount: IDiscount, id: string) => {
+    return axios.patch<IBackendRes<IDiscount>>(`/api/v1/discounts/${id}`, { ...discount })
+}
+
+export const callDeleteDiscount = (id: string) => {
+    return axios.delete<IBackendRes<IDiscount>>(`/api/v1/discounts/${id}`);
+}
+
+export const callFetchDiscount = (query: string) => {
+    return axios.get<IBackendRes<IModelPaginate<IDiscount>>>(`/api/v1/discounts?${query}`);
+}
+
+export const callFetchDiscountById = (id: string) => {
+    return axios.get<IBackendRes<IDiscount>>(`/api/v1/discounts/${id}`);
 }
 //
 

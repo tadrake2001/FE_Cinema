@@ -35,27 +35,22 @@ const Header = (props: any) => {
     {
       label: <Link to={""}>Trang Chủ</Link>,
       key: "home",
-      icon: <TwitterOutlined />,
     },
     {
       label: <Link to={"film"}>Phim</Link>,
       key: "film",
-      icon: <CodeOutlined />,
     },
     {
       label: <Link to={"cinema"}>Rạp chiếu phim</Link>,
       key: "cinema",
-      icon: <VideoCameraOutlined />,
     },
     {
       label: <Link to={"showtime"}>Mua vé</Link>,
       key: "showtime",
-      icon: <FormOutlined />,
     },
     {
       label: <Link to={"promotion"}>Khuyến mãi</Link>,
       key: "promotion",
-      icon: <FormOutlined />,
     },
   ];
 

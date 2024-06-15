@@ -60,9 +60,9 @@ export interface IFilm {
     description: string;
     startDate: Date;
     endDate: Date;
-    genres?: String[];
+    genres?: string[];
     actors?: string[];
-    images?: String[];
+    images?:string[];
     isActive?: boolean;
     createdBy?: string;
     isDeleted?: boolean;
@@ -100,6 +100,20 @@ export interface ICinema {
     _id?: string;
     name: string;
     logo: string;
+    description: string;
+    createdBy?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
+    address: string;
+}
+
+export interface ISnack {
+    _id?: string;
+    name: string;
+    price: number;
+    image: string;
     description: string;
     createdBy?: string;
     isDeleted?: boolean;
@@ -160,12 +174,23 @@ export interface IRoom {
     _id?: string;
     name: string;
     type: string;
-    type: string;
     seats: number;
     cinema?: {
         _id: string;
         name: string;
     }
+    createdBy?: string;
+    isDeleted?: boolean;
+    deletedAt?: boolean | null;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface IDiscount {
+    _id?: string;
+    name: string;
+    typeDiscount: string;
+    discount: number;
     createdBy?: string;
     isDeleted?: boolean;
     deletedAt?: boolean | null;

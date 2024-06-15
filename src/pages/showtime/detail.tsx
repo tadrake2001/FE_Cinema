@@ -116,7 +116,7 @@ const ClientShowtimeDetailPage = () => {
       <h1>Rạp: {showtimeDetail?.room?.name}</h1>
       <h1>Giá tiền: {total}</h1>
       <div className={styles["seats-list"]}>
-        {showtimeDetail?.seats?.slice(0, 50).map((seat) => (
+        {showtimeDetail?.seats?.slice(0, 70).map((seat) => (
           <div
             key={seat._id}
             className={`${styles["seat"]} ${

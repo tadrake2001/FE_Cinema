@@ -38,7 +38,7 @@ const ClientFilmDetailPage = (props: any) => {
     );
   };
 
-  const chooseSlide = (index) => {
+  const chooseSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
@@ -57,21 +57,19 @@ const ClientFilmDetailPage = (props: any) => {
   useEffect(() => {
     const init = async () => {
       if (id) {
-        setIsLoading(true)
+        setIsLoading(true);
         const res = await callFetchFilmById(id);
         if (res?.data) {
-          setFilmDetail(res.data)
+          setFilmDetail(res.data);
         }
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
     init();
   }, [id]);
 
   return (
-    <div
-      className={`${styles["container"]} ${styles["detail-film-section"]}`}
-    >
+    <div className={`${styles["container"]} ${styles["detail-film-section"]}`}>
       {isLoading ? (
         <Skeleton />
       ) : (
@@ -81,39 +79,55 @@ const ClientFilmDetailPage = (props: any) => {
               <div className={styles["detail-container"]}>
                 <div className={styles["detail-slide"]}>
                   <div className={styles["slider-container"]}>
-                    <button className={styles["button-left"]} onClick={prevSlide}>❮</button>
+                    <button
+                      className={styles["button-left"]}
+                      onClick={prevSlide}
+                    >
+                      ❮
+                    </button>
                     <div className={styles["slider-wrapper"]}>
-                      {images.map((image, index) => (
+                      {filmDetail.images?.map((image, index) => (
                         <div
                           key={index}
-                          className={`${styles["slide"]} ${index === currentIndex ? styles['active'] : ''}`}
+                          className={`${styles["slide"]} ${
+                            index === currentIndex ? styles["active"] : ""
+                          }`}
                         >
                           <img
                             alt="detail-film"
                             className={styles["slide-image"]}
-                            src={`${import.meta.env.VITE_BACKEND_URL}/images/film/${image
-                              }`}
+                            src={`${
+                              import.meta.env.VITE_BACKEND_URL
+                            }/images/film/${image}`}
                           />
                         </div>
                       ))}
                     </div>
-                    <button className={styles["button-right"]} onClick={nextSlide}>❯</button>
+                    <button
+                      className={styles["button-right"]}
+                      onClick={nextSlide}
+                    >
+                      ❯
+                    </button>
                   </div>
                 </div>
                 <div className={styles["detail-info"]}>
                   <div className={styles["info-slide"]}>
                     <div className={styles["info-wrapper"]}>
-                      {images.map((image, index) => (
+                      {filmDetail.images?.map((image, index) => (
                         <div
                           key={index}
                           onClick={() => chooseSlide(index)}
-                          className={`${styles["slide"]} ${index === currentIndex ? styles['active'] : ''}`}
+                          className={`${styles["slide"]} ${
+                            index === currentIndex ? styles["active"] : ""
+                          }`}
                         >
                           <img
                             alt="detail-film"
                             className={styles["info-image"]}
-                            src={`${import.meta.env.VITE_BACKEND_URL}/images/film/${image
-                              }`}
+                            src={`${
+                              import.meta.env.VITE_BACKEND_URL
+                            }/images/film/${image}`}
                           />
                         </div>
                       ))}
@@ -126,11 +140,14 @@ const ClientFilmDetailPage = (props: any) => {
                           width={200}
                           height={200}
                           alt="detail-film"
-                          src={`${import.meta.env.VITE_BACKEND_URL}/images/film/${filmDetail.logo
-                            }`}
+                          src={`${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/images/film/${filmDetail.logo}`}
                         />
                         <div>
-                          <button className={styles["btn-apply"]}>Mua vé</button>
+                          <button className={styles["btn-apply"]}>
+                            Mua vé
+                          </button>
                         </div>
                       </div>
                       <div className={styles["info-text"]}>
@@ -143,7 +160,8 @@ const ClientFilmDetailPage = (props: any) => {
                           Giám đốc sản xuất: {filmDetail.director}
                         </div>
                         <div className={styles["type"]}>
-                          Diễn viên: {filmDetail?.actors?.map((item, index) => {
+                          Diễn viên:{" "}
+                          {filmDetail?.actors?.map((item, index) => {
                             return (
                               <Tag key={`${index}-key`} color="blue">
                                 {item}
@@ -180,7 +198,6 @@ const ClientFilmDetailPage = (props: any) => {
             </>
           )}
         </>
-
       )}
     </div>
   );

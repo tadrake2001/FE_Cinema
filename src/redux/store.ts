@@ -13,6 +13,8 @@ import ticketReducer from './slice/ticketSlide';
 import permissionReducer from './slice/permissionSlide';
 import roleReducer from './slice/roleSlide';
 import showtimeReducer from './slice/showtimeSlide';
+import snackReducer from './slice/snackSlide';
+import discountReducer from './slice/discountSlide';
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +23,9 @@ export const store = configureStore({
     user: userReducer,
     cinema: cinemaReducer,
     promotion: promotionReducer,
+    snack: snackReducer,
     room: roomReducer,
+    discount: discountReducer,
     showtime: showtimeReducer,
     ticket: ticketReducer,
     permission: permissionReducer,

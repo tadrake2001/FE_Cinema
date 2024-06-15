@@ -50,42 +50,42 @@ const LayoutAdmin = () => {
       {
         label: <Link to="/admin">Dashboard</Link>,
         key: "dashboard",
-        icon: <AppstoreOutlined />,
       },
       {
         label: <Link to="/admin/film">Film</Link>,
         key: "film",
-        icon: <BankOutlined />,
       },
       {
         label: <Link to="/admin/user">User</Link>,
         key: "user",
-        icon: <UserOutlined />,
       },
       {
         label: <Link to="/admin/cinema">Cinema</Link>,
         key: "cinema",
-        icon: <ScheduleOutlined />,
       },
       {
         label: <Link to="/admin/room">Room</Link>,
         key: "room",
-        icon: <VideoCameraOutlined />,
       },
       {
         label: <Link to="/admin/showtime">Showtime</Link>,
         key: "showtime",
-        icon: <VideoCameraOutlined />,
       },
       {
         label: <Link to="/admin/promotion">Promotion</Link>,
         key: "promotion",
-        icon: <ScheduleOutlined />,
       },
       {
         label: <Link to="/admin/ticket">Ticket</Link>,
         key: "ticket",
-        icon: <FileOutlined />,
+      },
+      {
+        label: <Link to="/admin/snack">Snack</Link>,
+        key: "snack",
+      },
+      {
+        label: <Link to="/admin/discount">Discount</Link>,
+        key: "discount",
       },
       //   {
       //     label: <Link to="/admin/permission">Permission</Link>,
@@ -95,7 +95,6 @@ const LayoutAdmin = () => {
       {
         label: <Link to="/admin/role">Role</Link>,
         key: "role",
-        icon: <ExceptionOutlined />,
       },
     ];
 

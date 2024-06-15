@@ -38,6 +38,9 @@ import ClientShowtimePage from "./pages/showtime";
 import PromotionPage from "./pages/admin/promotion";
 import ClientPromotionPage from "./pages/promotion";
 import ClientPromotionDetailPage from "./pages/promotion/detail";
+import SnackPage from "./pages/admin/snack";
+import DiscountPage from "./pages/admin/discount";
+import ViewUpsertDiscount from "./components/admin/discount/upsert.discount";
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -197,6 +200,42 @@ export default function App() {
                 <ProtectedRoute>
                   {" "}
                   <PromotionPage />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
+        {
+          path: "snack",
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <SnackPage />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
+        {
+          path: "discount",
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  {" "}
+                  <DiscountPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "upsert",
+              element: (
+                <ProtectedRoute>
+                  <ViewUpsertDiscount />
                 </ProtectedRoute>
               ),
             },
